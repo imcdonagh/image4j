@@ -10,6 +10,7 @@
 package net.sf.image4j.test;
 
 import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -29,19 +30,26 @@ public class Test {
 			System.exit(1);
 		}
 		
-		String strInFile = args.length < 1 ? "input.ico" : args[0];
-		String strOutFile = args.length < 2 ? "output.ico" : args[1];
+		String strInFile = args[0];
+		String strOutFile = args[1];
 
+		java.io.InputStream in = null;
 		try {
 			
 			java.util.List<java.awt.image.BufferedImage> images;
 
 			/***** decode ICO and save images as BMP and PNG ****/
 
+			if (strInFile.startsWith("http:")) {
+				in = new URL(strInFile).openStream();
+			} else {
+				in = new FileInputStream(strInFile);
+			}
+			
 			if (!strInFile.endsWith(".ico")) {
 
 				images = new ArrayList<java.awt.image.BufferedImage>(1);
-				images.add(ImageIO.read(new File(strInFile)));
+				images.add(ImageIO.read(in));
 				
 				System.out.println("Read image "+strInFile+"...OK");
 				
@@ -51,8 +59,7 @@ public class Test {
 
 				// load and decode ICO file
 
-				java.io.File inFile = new java.io.File(strInFile);
-				images = net.sf.image4j.codec.ico.ICODecoder.read(inFile);
+				images = net.sf.image4j.codec.ico.ICODecoder.read(in);
 				System.out.println("ICO decoding...OK");
 
 				// display summary of decoded images
@@ -76,7 +83,7 @@ public class Test {
 
 				for (int j = 0; j < images.size(); j++) {
 					java.awt.image.BufferedImage img = images.get(j);
-					String name = strInFile + "-" + j;
+					String name = strOutFile + "-" + j;
 					java.io.File bmpFile = new java.io.File(name + ".bmp");
 					java.io.File pngFile = new java.io.File(name + ".png");
 
@@ -99,7 +106,7 @@ public class Test {
 						images.size());
 
 				for (int k = 0; k < images.size(); k++) {
-					String name = strInFile + "-" + k + ".bmp";
+					String name = strOutFile + "-" + k + ".bmp";
 					java.io.File file = new java.io.File(name);
 
 					// read BMP
@@ -125,6 +132,10 @@ public class Test {
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
+		} finally {
+			try {
+				in.close();
+			} catch (IOException ex) { }
 		}
 
 	}

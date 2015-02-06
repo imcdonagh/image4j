@@ -55,7 +55,11 @@ public class LittleEndianInputStream extends java.io.DataInputStream {
   
   public int skip(int count, boolean strict) throws IOException {
 	  int skipped = 0;
-	  while (read() != -1 && skipped < count) {
+	  while (skipped < count) {
+		  int b = read();
+		  if (b == -1) {
+			  break;
+		  }
 		  skipped++;
 	  }
 	  if (skipped < count && strict) {
@@ -171,5 +175,15 @@ public class LittleEndianInputStream extends java.io.DataInputStream {
     long ret = (i4 << 24) | (i3 << 16) | (i2 << 8) | i1;
     
     return ret;
+  }
+
+  public void readAll(byte[] b) throws IOException {
+	 readFully(b);
+	 read += b.length;
+  }
+  
+  public void readAll(byte[] b, int off, int len) throws IOException {
+	  readFully(b, off, len);
+	  read += len;
   }
 }
