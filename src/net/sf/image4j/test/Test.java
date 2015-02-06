@@ -7,7 +7,7 @@
  * and open the template in the editor.
  */
 
-package net.sf.image4j.Test;
+package net.sf.image4j.test;
 
 import java.io.*;
 
