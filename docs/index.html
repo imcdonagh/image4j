@@ -1,0 +1,265 @@
+<html>
+<head>
+	<title>image4j - Image Library for Java: Read and Write ICO &amp; BMP formats in 100% pure Java</title>
+	<meta name="keywords" content="Open Source,Java,ICO,BMP,image,format,encode,decode,read,write,icon,bitmap"/>
+	<style type="text/css">
+		
+		a { color: blue; text-decoration: none; font-weight: bold; }
+		a:hover { color: orange; text-decoration: underline; }
+		div.hr { 
+			height: 6px; 
+			//border-top: solid 1px; 
+			width: 100%; 
+		}
+		div.nav { width: 100%; background-color: rgb(50,110,170); margin: 0px; padding: 0px; border-top: solid white 1px; }
+		table.nav { margin: 0px; padding: 0px; }		
+		table.nav tr td { padding: 0px; border-right: solid white 1px; }		
+		table.nav tr td a { 
+			padding: 8px 4px; 
+			//background-color: rgb(64,100,192); 
+			display: block; 
+			color: white; 
+			margin: 0px; 
+			font-weight: normal;
+			font-size: 80%;
+		}
+		table.nav tr td a:hover { 
+			color: white; 
+			text-decoration: none; 
+			background-color: rgb(100,192,224); 
+		}
+		code { background-color: white; }
+		span.string { color: green; }
+		span.keyword { color: blue; font-weight: bold; }
+		span.method { font-weight: bold; }
+
+		h2 { border: solid blue 1px; background: rgb(192,224,255); padding: 2px; }
+
+		div.header { background-color: rgb(64,128,192); padding: 0px; color: white; border: solid white 1px; }
+
+		div.body { margin: 1em; }
+
+		h1 { margin: .5em; }
+
+		img.decor { margin-right: 2em; float: left; }
+		
+		div.main { 
+			border: solid gray 4px; 
+			margin: 1em 1em;			
+			font-family: Tahoma,Arial,Helvetica,Verdana,sans-serif;
+			background-color: white;
+			color: black;		
+
+		}
+
+		td.main { width: 80%; }
+		td.main-left { width: 20%; }
+		td.main-right { width: 20%; }
+		table.main { width: 80%; }
+
+		body {
+			background-color: rgb(220,220,220);
+			margin: 0px;					
+		}
+
+		div.footer {
+			background-color: rgb(50,110,170);
+			color: white;
+			text-align: center;
+			margin: 0px;
+			padding: .5em;
+			font-size: 80%;			
+		}
+		
+	</style>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+
+<td class="main-left"></td>
+<td class="main">
+
+<div class="main">
+
+<div class="header">
+
+<div style="margin: 1em;">
+<img src="resources/penduke-transparent.gif" style="float: left;"/>
+<h1>image4j</h1>
+<p><i>Image Library for Java</i></p>
+</div>
+
+<div class="nav">
+<table class="nav" cellspacing="0">
+	<tr>
+		<td> <a href="#overview"> Overview</a> </td>
+		<td> <a href="#purpose"> Purpose</a> </td>
+		<td> <a href="#license"> License</a> </td>
+		<td> <a href="#history"> History</a> </td>		
+		<td> <a href="#plans"> Plans</a> </td>
+		<td> <a href="#quickstart"> QuickStart</a> </td>
+		<td> <a href="#docs"> Documentation</a>  </td>
+		<td> <a href="#download"> Download</a>  </td>
+		<td> <a href="#credits"> Credits</a> </td>
+		<td> <a href="#disclaimer"> Disclaimer</a>  </td>		
+	</tr>
+</table>
+</div>
+
+</div>
+
+
+	<div class="body">
+	
+	<div class="hr"></div>
+	
+	<h2><a name="overview"></a>Overview</h2>
+	<p>
+	The <b>image4j</b> library allows you to read and write certain image formats in 100% pure Java.
+	</p>
+	<p>Currently the following formats are supported:</p>
+	<ul>
+		<li>BMP (Microsoft bitmap format - uncompressed; 1, 4, 8, 24 and 32 bit)</li>
+		<li>ICO (Microsoft icon format - 1, 4, 8, 24 and 32 bit [XP uncompressed, Vista compressed])</li>
+	</ul>
+	
+	<div class="hr"></div>
+	
+	<h2><a name="purpose"></a>Purpose</h2>
+	<img src="resources/jws-dukeonly.gif" style="float: left;" class="decor"/>
+	<p>This project aims to provide:
+	<ul>
+		<li>an open source library for handling various image formats in Java</li>
+		<li>with a commercial-friendly license</li>
+		<li>using only Java code, ie. without using any JNI hacks</li>
+		<li>with no dependencies on third-party libraries (where possible)</li>
+	</ul>
+	</p>
+	
+	<div class="hr"></div>
+	
+	<h2><a name="license"></a>License</h2>
+	<p>The <b>image4j</b> library is licensed under the <a href="http://www.opensource.org/licenses/lgpl-license.php">GNU LGPL</a> so you are free to use it in your Free Software and Open Source projects, as well as commercial projects, under the terms of the LGPL.</p>
+	
+	<div class="hr"></div>
+	
+	<h2><a name="history"></a>History</h2>
+	<p>This project began after I spent hours searching for a library that would meet the above criteria and found that there is probably no such thing - or at least, not any more.  The only support I could find for the ICO format was read-only, so doing cool stuff - like generating favicons on the fly - using only Java code was not possible.</p>
+	
+	<div class="hr"></div>
+	
+	<h2><a name="plans"></a>Planned Features</h2>
+	<p>The following features are planned for development:
+	<ul>
+		<li>A WebStart demo</li>
+		<li>Support for RLE (Run Length Encoded) bitmaps</li>
+		<li>ImageIO provider for the various supported formats, where no provider currently exists (eg. ICO format)</li>
+		<li><a href="http://ant.apache.org/">Ant</a> tasks for reading/writing/converting the various supported image formats</li>
+		<li>A <tt>javax.swing.Icon</tt> implementation for the ICO format that selects the best matching image for the current graphics environment</li>
+	</ul>    
+	</p>
+    <p>If you know of a feature you'd like to see in this library, drop me a mail &lt;ianmdev at users.sourceforge.net&gt; and we'll talk :)</p>
+	
+	<div class="hr"></div>
+	
+	<h2><a name="quickstart"></a>QuickStart</h2>
+	<img src="resources/duke-running-4.gif" style="float: left;" class="decor"/>
+	<p>
+	It is possible to decode/encode BMP and ICO files with <b>just one line of code</b>!
+	</p>
+	<p>
+	The <b>image4j</b> library consists of only Java code and has no dependencies on third-party libraries, so you
+	just add it to the classpath and you're good to go.
+	</p>
+	<p>
+	Although the code is compatible with Java 1.5.0 or later, it should be relatively simple to port the code to an older version, eg. 1.4.2.
+	If you would like support for an earlier version of Java, please write to me at &lt;ianmdev at sourceforge.net&gt;.
+	</p>
+	
+	<h4>BMP</h4>
+	
+	<div style="margin-left: 1em;">
+	
+	<h5>Decode</h5>
+	<p style="margin-left: 1em;"><code><pre>BufferedImage image = BMPDecoder.<span class="method">read</span>(<span class="keyword">new</span> File(<span class="string">"input.bmp"</span>));
+	</pre></code></p>
+	
+	<h5>Encode</h5>
+	<p style="margin-left: 1em;"><code><pre>BMPEncoder.<span class="method">write</span>(image, <span class="keyword">new</span> File(<span class="string">"output.bmp"</span>));
+	</pre></code></p>
+	
+	</div>
+	
+	<h4>ICO</h4>
+	
+	<div style="margin-left: 1em;">
+	
+	<h5>Decode</h5>
+	<p style="margin-left: 1em;"><code><pre>List&lt;BufferedImage&gt; image = ICODecoder.<span class="method">read</span>(<span class="keyword">new</span> File(<span class="string">"input.ico"</span>));
+	</pre></code></p>
+	
+	<h5>Encode</h5>
+	<p style="margin-left: 1em;"><code><pre>ICOEncoder.<span class="method">write</span>(images, <span class="keyword">new</span> File(<span class="string">"output.ico"</span>));
+	</pre></code></p>
+	
+	</div>
+	
+	<div class="hr"></div>
+	
+	<h2><a name="docs"></a>Documentation</h2>
+	<p>
+		Browse the <a href="javadoc/index.html">API Javadocs</a> online.
+	</p>
+	
+	<div class="hr"></div>
+	
+	<h2><a name="download"></a>Download</h2>
+	<p><a href="http://sourceforge.net/project/showfiles.php?group_id=181651">Download the latest version</a> at SourceForge.net.</p>
+	
+	<div class="hr"></div>
+	
+	<h2><a name="credits"></a>Credits</h2>
+	<img src="resources/thumbsup.gif" style="float: left;" class="decor"/>
+	<ul>
+		<li>The <b>File Formats</b> page at <b><a href="http://daubnet.com/formats/index.html">DaubNET</a></b> for information on various image formats</li>
+		<li>The <b>Duke</b> project at <b><a href="http://duke.dev.java.net/">dev.java.net</a></b> for the open source images of Duke - the Java mascot [used on this page and in the examples]</li>
+		<li><b><a href="http://sourceforge.net">SourceForge.net</a></b> for hosting this project</li>
+		<li>The <b><a href="http://netbeans.org">NetBeans project</a></b> for the best open source Java IDE</li>
+		<li><b><a href="http://gimp.org">The GIMP</a></b>, which I use for editing images</li>
+	</ul>
+	
+	<div class="hr"></div>
+	
+	<h2><a name="disclaimer"></a>Disclaimer</h2>
+	<p>To my knowledge, there are no patents on either the BMP or ICO formats.  If you believe that this library or this page violates any patents or copyrights, please write to me at &lt;ianmdev at sourceforge.net&gt;.</p>
+	
+	</div>
+
+
+<div class="footer">
+	&copy; 2006-2007 <b>image4j</b> &raquo; By Ian McDonagh
+     <br/>Last Updated: Jan 21, 2008
+</div>
+
+</div>
+<div style="text-align: center; margin: 1em;">
+	<a href="http://sourceforge.net" style="border: none;">
+		<img src="http://sflogo.sourceforge.net/sflogo.php?group_id=174727&type=1"
+			alt="SourceForge.net Logo"
+			style="border: none;"
+		/>
+	</a>
+</div>
+
+</td>
+<td class="main-right">
+</td>
+
+</tr>
+</table>
+
+</body>
+</html>
