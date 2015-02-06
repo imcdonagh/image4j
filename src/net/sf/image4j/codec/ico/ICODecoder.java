@@ -9,13 +9,10 @@
 
 package net.sf.image4j.codec.ico;
 
-import java.awt.image.BufferedImage;
-import java.awt.image.WritableRaster;
-import java.io.IOException;
-import net.sf.image4j.codec.bmp.BMPConstants;
-import net.sf.image4j.codec.bmp.BMPDecoder;
-import net.sf.image4j.codec.bmp.ColorEntry;
-import net.sf.image4j.codec.bmp.InfoHeader;
+import java.awt.image.*;
+import java.io.*;
+
+import net.sf.image4j.codec.bmp.*;
 
 /**
  * Decodes images in ICO format.
@@ -145,15 +142,13 @@ public class ICODecoder {
             int skip = size - infoHeaderSize - dataSize;
             
             //ignore AND bitmap since alpha channel stores transparency
-            int skipped = in.skipBytes(skip);
-            int s = skip;
-            while (skipped < s) {
-              if (skipped < 0) {
-                throw new IOException("Failed to read [skip]");
-              }
-              s = skip - skipped;
-              skipped = in.skipBytes(s);
+            
+            if (in.skip(skip, false) < skip && i < sCount - 1) {
+            	throw new EOFException("Unexpected end of input");
             }
+            // If we skipped less bytes than expected, the AND mask is probably badly formatted.
+            // If we're at the last/only entry in the file, silently ignore and continue processing...
+            
             ////read AND bitmap
             //BufferedImage and = BMPDecoder.read(andHeader, in, andColorTable);
             //this.img.add(and);
@@ -227,10 +222,10 @@ public class ICODecoder {
           
           IconEntry e = entries[i];
           byte[] pngData = new byte[e.iSizeInBytes - 8];
-          int count = in.read(pngData);
-          if (count != pngData.length) {
-            throw new IOException("Unable to read image #"+i+" - incomplete PNG compressed data");
-          }
+          /*int count = */in.readFully(pngData);
+          //if (count != pngData.length) {
+          //  throw new IOException("Unable to read image #"+i+" - incomplete PNG compressed data");
+          //}
           java.io.ByteArrayOutputStream bout = new java.io.ByteArrayOutputStream();
           java.io.DataOutputStream dout = new java.io.DataOutputStream(bout);
           dout.writeInt(PNG_MAGIC);

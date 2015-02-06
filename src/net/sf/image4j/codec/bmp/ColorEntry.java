@@ -40,10 +40,10 @@ public class ColorEntry {
    * @throws java.io.IOException if an error occurs
    */
   public ColorEntry(net.sf.image4j.io.LittleEndianInputStream in) throws IOException {
-    bBlue = in.readUnsignedByte();
-    bGreen = in.readUnsignedByte();
-    bRed = in.readUnsignedByte();
-    bReserved = in.readUnsignedByte();
+    bBlue = in.readUByte();
+    bGreen = in.readUByte();
+    bRed = in.readUByte();
+    bReserved = in.readUByte();
   }
   
   /**

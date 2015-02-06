@@ -269,7 +269,7 @@ public class BMPDecoder {
     
     for (int y = infoHeader.iHeight - 1; y >= 0; y--) {
       for (int i = 0; i < bytesPerLine; i++) {
-        line[i] = lis.readUnsignedByte();
+        line[i] = lis.readUByte();
       }
       
       for (int x = 0; x < infoHeader.iWidth; x++) {
@@ -335,7 +335,7 @@ public class BMPDecoder {
     for (int y = infoHeader.iHeight - 1; y >= 0; y--) {
       //scan line
       for (int i = 0; i < bytesPerLine; i++) {
-        int b = lis.readUnsignedByte();
+        int b = lis.readUByte();
         line[i] = b;
       }
       
@@ -411,14 +411,14 @@ public class BMPDecoder {
     
     for (int y = infoHeader.iHeight - 1; y >= 0; y--) {
       for (int x = 0; x < infoHeader.iWidth; x++) {
-        int b = lis.readUnsignedByte();
+        int b = lis.readUByte();
         //int clr = c[b];
         //img.setRGB(x, y, clr);
         //set sample (colour index) for pixel
         raster.setSample(x, y , 0, b);
       }
       
-      lis.skipBytes(padBytesPerLine);
+      lis.skip(padBytesPerLine);
     }
     
     return img;
@@ -458,9 +458,9 @@ public class BMPDecoder {
     
     for (int y = infoHeader.iHeight - 1; y >= 0; y--) {
       for (int x = 0; x < infoHeader.iWidth; x++) {
-        int b = lis.readUnsignedByte();
-        int g = lis.readUnsignedByte();
-        int r = lis.readUnsignedByte();
+        int b = lis.readUByte();
+        int g = lis.readUByte();
+        int r = lis.readUByte();
         
         //int c = 0x00000000 | (r << 16) | (g << 8) | (b);
         //System.out.println(x + ","+y+"="+Integer.toHexString(c));
@@ -469,7 +469,7 @@ public class BMPDecoder {
         raster.setSample(x, y, 1, g);
         raster.setSample(x, y, 2, b);
       }
-      lis.skipBytes(padBytesPerLine);
+      lis.skip(padBytesPerLine);
     }
     
     return img;
@@ -503,10 +503,10 @@ public class BMPDecoder {
     
     for (int y = infoHeader.iHeight - 1; y >= 0; y--) {
       for (int x = 0; x < infoHeader.iWidth; x++) {
-        int b = lis.readUnsignedByte();
-        int g = lis.readUnsignedByte();
-        int r = lis.readUnsignedByte();
-        int a = lis.readUnsignedByte();
+        int b = lis.readUByte();
+        int g = lis.readUByte();
+        int r = lis.readUByte();
+        int a = lis.readUByte();
         rgb.setSample(x, y, 0, r);
         rgb.setSample(x, y, 1, g);
         rgb.setSample(x, y, 2, b);

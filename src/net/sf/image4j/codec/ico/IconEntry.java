@@ -51,13 +51,13 @@ public class IconEntry {
    */ 
   public IconEntry(LittleEndianInputStream in) throws IOException {
     //Width 	1 byte 	Cursor Width (16, 32, 64, 0 = 256)
-    bWidth = in.readUnsignedByte();
+    bWidth = in.readUByte();
     //Height 	1 byte 	Cursor Height (16, 32, 64, 0 = 256 , most commonly = Width)
-    bHeight = in.readUnsignedByte();
+    bHeight = in.readUByte();
     //ColorCount 	1 byte 	Number of Colors (2,16, 0=256)
-    bColorCount = in.readUnsignedByte();
+    bColorCount = in.readUByte();
     //Reserved 	1 byte 	=0
-    bReserved = in.readByte();
+    bReserved = in.readSByte();
     //Planes 	2 byte 	=1
     sPlanes = in.readShortLE();
     //BitCount 	2 byte 	bits per pixel (1, 4, 8)
