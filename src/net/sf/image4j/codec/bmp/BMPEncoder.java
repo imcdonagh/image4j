@@ -12,7 +12,8 @@ package net.sf.image4j.codec.bmp;
 import java.awt.image.BufferedImage;
 import java.awt.image.IndexColorModel;
 import java.awt.image.Raster;
-import java.io.IOException;
+import java.io.*;
+
 import net.sf.image4j.io.LittleEndianOutputStream;
 
 /**
@@ -32,7 +33,16 @@ public class BMPEncoder {
    * @throws java.io.IOException if an error occurs
    */
   public static void write(BufferedImage img, java.io.File file) throws IOException {
-    write(img, new java.io.FileOutputStream(file));
+	  java.io.FileOutputStream fout = new java.io.FileOutputStream(file);
+	  try {
+		  BufferedOutputStream out = new BufferedOutputStream(fout);
+		  write(img, out);
+		  out.flush();
+	  } finally {
+		  try {
+			  fout.close();
+		  } catch (IOException ex) { }
+	  }
   }
   
   /**
@@ -199,6 +209,9 @@ public class BMPEncoder {
    */
   public static int getBytesPerLine1(int width) {
     int ret = (int) width / 8;
+    if (ret * 8 < width) {
+    	ret++;
+    }
     if (ret % 4 != 0) {
       ret = (ret / 4 + 1) * 4;
     }

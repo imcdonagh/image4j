@@ -13,9 +13,11 @@ import java.awt.image.BufferedImage;
 import java.awt.image.IndexColorModel;
 import java.awt.image.Raster;
 import java.awt.image.WritableRaster;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
+
 import javax.imageio.ImageWriter;
+
 import net.sf.image4j.io.LittleEndianOutputStream;
 import net.sf.image4j.codec.bmp.BMPEncoder;
 import net.sf.image4j.util.ConvertUtil;
@@ -103,7 +105,16 @@ public class ICOEncoder {
    * @throws java.io.IOException if an error occurs
    */
   public static void write(BufferedImage image, int bpp, java.io.File file) throws IOException {
-    write(image, bpp, new java.io.FileOutputStream(file));
+    java.io.FileOutputStream fout = new java.io.FileOutputStream(file);
+    try {
+    	BufferedOutputStream out = new BufferedOutputStream(fout);
+    	write(image, bpp, out);
+    	out.flush();
+    } finally {
+    	try {
+    		fout.close();
+    	} catch (IOException ex) { }
+    }
   }
   
   /**

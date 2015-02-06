@@ -36,7 +36,14 @@ public class ICODecoder {
    * @throws java.io.IOException if an error occurs
    */
   public static java.util.List<BufferedImage> read(java.io.File file) throws IOException {
-    return read(new java.io.FileInputStream(file));
+	java.io.FileInputStream fin = new java.io.FileInputStream(file);
+    try {
+    	return read(new BufferedInputStream(fin));
+    } finally {
+    	try {
+    		fin.close();
+    	} catch (IOException ex) { }
+    }
   }
   
   /**
@@ -48,7 +55,14 @@ public class ICODecoder {
    * @since 0.7
    */
   public static java.util.List<ICOImage> readExt(java.io.File file) throws IOException {
-    return readExt(new java.io.FileInputStream(file));
+	  java.io.FileInputStream fin = new java.io.FileInputStream(file);
+	  try {
+		  return readExt(new BufferedInputStream(fin));
+	  } finally {
+		  try {
+			  fin.close();
+		  } catch (IOException ex) { }
+	  }
   }
   
   /**

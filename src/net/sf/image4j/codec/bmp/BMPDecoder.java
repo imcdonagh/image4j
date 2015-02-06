@@ -6,10 +6,8 @@
 
 package net.sf.image4j.codec.bmp;
 
-import java.awt.image.BufferedImage;
-import java.awt.image.IndexColorModel;
-import java.awt.image.WritableRaster;
-import java.io.IOException;
+import java.awt.image.*;
+import java.io.*;
 
 /**
  * Decodes images in BMP format.
@@ -524,7 +522,14 @@ public class BMPDecoder {
    * @return the decoded image read from the source file
    */
   public static BufferedImage read(java.io.File file) throws IOException {
-    return read(new java.io.FileInputStream(file));
+	  java.io.FileInputStream fin = new java.io.FileInputStream(file);
+	  try {
+		  return read(new BufferedInputStream(fin));
+	  } finally {
+		  try {
+			  fin.close();
+		  } catch (IOException ex) { }
+	  }
   }
   
   /**
@@ -546,7 +551,14 @@ public class BMPDecoder {
    * @since 0.7
    */
   public static BMPImage readExt(java.io.File file) throws IOException {
-    return readExt(new java.io.FileInputStream(file));    
+	  java.io.FileInputStream fin = new java.io.FileInputStream(file);
+     try {
+    	 return readExt(new BufferedInputStream(fin));    
+     } finally {
+    	 try {
+    		 fin.close();
+    	 } catch (IOException ex) { }
+     }
   }
   
   /**
