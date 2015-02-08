@@ -1,0 +1,6 @@
+net.sf.image4j.codec.bmp
+net.sf.image4j.codec.ico
+net.sf.image4j.example
+net.sf.image4j.io
+net.sf.image4j.test
+net.sf.image4j.util

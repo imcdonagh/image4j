@@ -85,7 +85,7 @@ public class ICODecoder {
 			try {
 				fin.close();
 			} catch (IOException ex) {
-				log.log(Level.FINE, "Failed to close file input for file "
+				log.log(Level.WARNING, "Failed to close file input for file "
 						+ file, ex);
 			}
 		}
@@ -142,7 +142,8 @@ public class ICODecoder {
 			throws IOException {
 		// long t = System.currentTimeMillis();
 
-		LittleEndianInputStream in = new LittleEndianInputStream(is);
+		LittleEndianInputStream in = new LittleEndianInputStream(
+				new CountingInputStream(is));
 
 		// Reserved 2 byte =0
 		short sReserved = in.readShortLE();
@@ -157,7 +158,7 @@ public class ICODecoder {
 			entries[s] = new IconEntry(in);
 		}
 		// Seems like we don't need this, but you never know!
-		//entries = sortByFileOffset(entries);
+		// entries = sortByFileOffset(entries);
 
 		int i = 0;
 		// images list of bitmap structures in BMP/PNG format
@@ -166,13 +167,13 @@ public class ICODecoder {
 		try {
 			for (i = 0; i < sCount; i++) {
 				// Make sure we're at the right file offset!
-				int fileOffset = in.getBytesRead();
+				int fileOffset = in.getCount();
 				if (fileOffset != entries[i].iFileOffset) {
 					throw new IOException("Cannot read image #" + i
 							+ " starting at unexpected file offset.");
 				}
 				int info = in.readIntLE();
-				log.log(Level.FINE, "Image #" + i + " @ " + in.getBytesRead()
+				log.log(Level.FINE, "Image #" + i + " @ " + in.getCount()
 						+ " info = " + EndianUtils.toInfoString(info));
 				if (info == 40) {
 
@@ -191,15 +192,16 @@ public class ICODecoder {
 					// and store as separate images
 
 					BufferedImage xor = BMPDecoder.read(xorHeader, in);
-					// If we want to be sure we've decoded the XOR mask correctly,
+					// If we want to be sure we've decoded the XOR mask
+					// correctly,
 					// we can write it out as a PNG to a temp file here.
-					//try {
-					//	File temp = File.createTempFile("image4j", ".png");
-					//	ImageIO.write(xor, "png", temp);
-					//	log.info("Wrote xor mask for image #" + i + " to "
-					//			+ temp.getAbsolutePath());
-					//} catch (Throwable ex) {
-					//}
+					// try {
+					// File temp = File.createTempFile("image4j", ".png");
+					// ImageIO.write(xor, "png", temp);
+					// log.info("Wrote xor mask for image #" + i + " to "
+					// + temp.getAbsolutePath());
+					// } catch (Throwable ex) {
+					// }
 					// Or just add it to the output list:
 					// img.add(xor);
 
@@ -219,7 +221,7 @@ public class ICODecoder {
 						int dataSize = xorHeader.iWidth * xorHeader.iHeight * 4;
 						int skip = size - infoHeaderSize - dataSize;
 						int skip2 = entries[i].iFileOffset + size
-								- in.getBytesRead();
+								- in.getCount();
 
 						// ignore AND bitmap since alpha channel stores
 						// transparency
@@ -310,7 +312,7 @@ public class ICODecoder {
 					IconEntry e = entries[i];
 					int size = e.iSizeInBytes - 8;
 					byte[] pngData = new byte[size];
-					/* int count = */in.readAll(pngData);
+					/* int count = */in.readFully(pngData);
 					// if (count != pngData.length) {
 					// throw new
 					// IOException("Unable to read image #"+i+" - incomplete PNG compressed data");

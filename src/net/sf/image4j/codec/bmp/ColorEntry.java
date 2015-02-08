@@ -12,7 +12,7 @@ package net.sf.image4j.codec.bmp;
 import java.io.IOException;
 
 /**
- * Represents an RGB colour entry used in the palette of an indexed image (colour depth <= 8).
+ * Represents an RGB colour entry used in the palette of an indexed image (colour depth &lt;= 8).
  * @author Ian McDonagh
  */
 public class ColorEntry {
@@ -40,10 +40,10 @@ public class ColorEntry {
    * @throws java.io.IOException if an error occurs
    */
   public ColorEntry(net.sf.image4j.io.LittleEndianInputStream in) throws IOException {
-    bBlue = in.readUByte();
-    bGreen = in.readUByte();
-    bRed = in.readUByte();
-    bReserved = in.readUByte();
+    bBlue = in.readUnsignedByte();
+    bGreen = in.readUnsignedByte();
+    bRed = in.readUnsignedByte();
+    bReserved = in.readUnsignedByte();
   }
   
   /**

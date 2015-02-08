@@ -20,7 +20,7 @@ public class IconEntry {
   public int bHeight;
   /**
    * The number of colours, calculated from {@link #sBitCount sBitCount}.
-   * <tt>0</tt> specifies a colour count of >= 256.
+   * <tt>0</tt> specifies a colour count of &gt;= 256.
    */
   public int bColorCount;
   /**
@@ -51,13 +51,13 @@ public class IconEntry {
    */ 
   public IconEntry(LittleEndianInputStream in) throws IOException {
     //Width 	1 byte 	Cursor Width (16, 32, 64, 0 = 256)
-    bWidth = in.readUByte();
+    bWidth = in.readUnsignedByte();
     //Height 	1 byte 	Cursor Height (16, 32, 64, 0 = 256 , most commonly = Width)
-    bHeight = in.readUByte();
+    bHeight = in.readUnsignedByte();
     //ColorCount 	1 byte 	Number of Colors (2,16, 0=256)
-    bColorCount = in.readUByte();
+    bColorCount = in.readUnsignedByte();
     //Reserved 	1 byte 	=0
-    bReserved = in.readSByte();
+    bReserved = in.readByte();
     //Planes 	2 byte 	=1
     sPlanes = in.readShortLE();
     //BitCount 	2 byte 	bits per pixel (1, 4, 8)

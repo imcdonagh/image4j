@@ -16,56 +16,23 @@ import java.io.IOException;
  * Reads little-endian data from a source <tt>InputStream</tt> by reversing byte ordering.
  * @author Ian McDonagh
  */
-public class LittleEndianInputStream extends java.io.DataInputStream {
-  
-	private int read;
+public class LittleEndianInputStream extends java.io.DataInputStream implements CountingDataInput {
 	
   /**
    * Creates a new instance of <tt>LittleEndianInputStream</tt>, which will read from the specified source.
    * @param in the source <tt>InputStream</tt>
    */
-  public LittleEndianInputStream(java.io.InputStream in) {
+  public LittleEndianInputStream(CountingInputStream in) {
     super(in);
   }
   
-  public int getBytesRead() {
-	return read;
-  }
-  
   @Override
-  public int read() throws IOException {
-	int b = super.read();
-	if (b != -1) {
-		read++;
-	}
-	return b;
-  }
-  
-  public int readUByte() throws IOException {
-	  int b = readUnsignedByte();
-	  read++;
-	  return b;
-  }
-  
-  public byte readSByte() throws IOException {
-	  byte b = readByte();
-	  read++;
-	  return b;
+  public int getCount() {
+	  return ((CountingInputStream) in).getCount();
   }
   
   public int skip(int count, boolean strict) throws IOException {
-	  int skipped = 0;
-	  while (skipped < count) {
-		  int b = read();
-		  if (b == -1) {
-			  break;
-		  }
-		  skipped++;
-	  }
-	  if (skipped < count && strict) {
-		  throw new EOFException("Failed to skip "+count+" bytes in input");
-	  }
-	  return skipped;
+	  return IOUtils.skip(this, count, strict);
   }
   
   /**
@@ -153,10 +120,10 @@ public class LittleEndianInputStream extends java.io.DataInputStream {
    * @since 0.6
    */
   public long readUnsignedInt() throws IOException {
-    long i1 = readUByte();
-    long i2 = readUByte();
-    long i3 = readUByte();
-    long i4 = readUByte();
+    long i1 = readUnsignedByte();
+    long i2 = readUnsignedByte();
+    long i3 = readUnsignedByte();
+    long i4 = readUnsignedByte();
    
     long ret = ((i1 << 24) | (i2 << 16) | (i3 << 8) | i4); 
     
@@ -167,23 +134,13 @@ public class LittleEndianInputStream extends java.io.DataInputStream {
    * @since 0.6
    */
   public long readUnsignedIntLE() throws IOException {
-    long i1 = readUByte();
-    long i2 = readUByte();
-    long i3 = readUByte();
-    long i4 = readUByte();
+    long i1 = readUnsignedByte();
+    long i2 = readUnsignedByte();
+    long i3 = readUnsignedByte();
+    long i4 = readUnsignedByte();
     
     long ret = (i4 << 24) | (i3 << 16) | (i2 << 8) | i1;
     
     return ret;
-  }
-
-  public void readAll(byte[] b) throws IOException {
-	 readFully(b);
-	 read += b.length;
-  }
-  
-  public void readAll(byte[] b, int off, int len) throws IOException {
-	  readFully(b, off, len);
-	  read += len;
   }
 }

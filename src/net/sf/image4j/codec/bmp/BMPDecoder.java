@@ -9,6 +9,8 @@ package net.sf.image4j.codec.bmp;
 import java.awt.image.*;
 import java.io.*;
 
+import net.sf.image4j.io.*;
+
 /**
  * Decodes images in BMP format.
  * @author Ian McDonagh
@@ -19,11 +21,11 @@ public class BMPDecoder {
   private InfoHeader infoHeader;
   
   /** Creates a new instance of BMPDecoder and reads the BMP data from the source.
-   * @param in the source <tt>InputStream<tt> from which to read the BMP data
+   * @param in the source <tt>InputStream</tt> from which to read the BMP data
    * @throws java.io.IOException if an error occurs
    */
   public BMPDecoder(java.io.InputStream in) throws IOException {
-    net.sf.image4j.io.LittleEndianInputStream lis = new net.sf.image4j.io.LittleEndianInputStream(in);
+    LittleEndianInputStream lis = new LittleEndianInputStream(new CountingInputStream(in));
             
     /* header [14] */
     
@@ -267,7 +269,7 @@ public class BMPDecoder {
     
     for (int y = infoHeader.iHeight - 1; y >= 0; y--) {
       for (int i = 0; i < bytesPerLine; i++) {
-        line[i] = lis.readUByte();
+        line[i] = lis.readUnsignedByte();
       }
       
       for (int x = 0; x < infoHeader.iWidth; x++) {
@@ -333,7 +335,7 @@ public class BMPDecoder {
     for (int y = infoHeader.iHeight - 1; y >= 0; y--) {
       //scan line
       for (int i = 0; i < bytesPerLine; i++) {
-        int b = lis.readUByte();
+        int b = lis.readUnsignedByte();
         line[i] = b;
       }
       
@@ -409,7 +411,7 @@ public class BMPDecoder {
     
     for (int y = infoHeader.iHeight - 1; y >= 0; y--) {
       for (int x = 0; x < infoHeader.iWidth; x++) {
-        int b = lis.readUByte();
+        int b = lis.readUnsignedByte();
         //int clr = c[b];
         //img.setRGB(x, y, clr);
         //set sample (colour index) for pixel
@@ -456,9 +458,9 @@ public class BMPDecoder {
     
     for (int y = infoHeader.iHeight - 1; y >= 0; y--) {
       for (int x = 0; x < infoHeader.iWidth; x++) {
-        int b = lis.readUByte();
-        int g = lis.readUByte();
-        int r = lis.readUByte();
+        int b = lis.readUnsignedByte();
+        int g = lis.readUnsignedByte();
+        int r = lis.readUnsignedByte();
         
         //int c = 0x00000000 | (r << 16) | (g << 8) | (b);
         //System.out.println(x + ","+y+"="+Integer.toHexString(c));
@@ -501,10 +503,10 @@ public class BMPDecoder {
     
     for (int y = infoHeader.iHeight - 1; y >= 0; y--) {
       for (int x = 0; x < infoHeader.iWidth; x++) {
-        int b = lis.readUByte();
-        int g = lis.readUByte();
-        int r = lis.readUByte();
-        int a = lis.readUByte();
+        int b = lis.readUnsignedByte();
+        int g = lis.readUnsignedByte();
+        int r = lis.readUnsignedByte();
+        int a = lis.readUnsignedByte();
         rgb.setSample(x, y, 0, r);
         rgb.setSample(x, y, 1, g);
         rgb.setSample(x, y, 2, b);
