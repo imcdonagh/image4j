@@ -13,10 +13,12 @@ ICO (Microsoft icon format - 1, 4, 8, 24 and 32 bit [XP uncompressed, Vista comp
 
 This project aims to provide:
 
-an open source library for handling various image formats in Java
-with a commercial-friendly license
-using only Java code, ie. without using any JNI hacks
-with no dependencies on third-party libraries (where possible)
+<ul>
+<li>an open source library for handling various image formats in Java</li>
+<li>with a commercial-friendly license</li>
+<li>using only Java code, ie. without using any JNI hacks</li>
+<li>with no dependencies on third-party libraries (where possible)</li>
+</ul>
 
 #License
 
