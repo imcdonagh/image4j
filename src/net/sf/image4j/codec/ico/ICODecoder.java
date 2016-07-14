@@ -332,14 +332,6 @@ public class ICODecoder {
 					reader.setInput(input);
 					java.awt.image.BufferedImage img = reader.read(0);
 
-					try {
-						File temp = File.createTempFile("image4j", "png");
-						ImageIO.write(img, "png", temp);
-						log.info("Wrote xor mask for image #" + i + " to "
-								+ temp.getAbsolutePath());
-					} catch (Throwable ex) {
-					}
-
 					// create ICOImage
 					IconEntry iconEntry = entries[i];
 					ICOImage icoImage = new ICOImage(img, null, iconEntry);
