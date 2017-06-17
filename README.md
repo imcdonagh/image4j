@@ -71,7 +71,7 @@ Browse the API Javadocs online.
 
 ## Download
 
-Download the latest version at [SourceForge.net](https://sourceforge.net/projects/image4j/).
+Download the latest version at [SourceForge.net](https://sourceforge.net/projects/image4j/) or from the Github [release page](https://github.com/imcdonagh/image4j/releases).
 
 ## Credits
 
