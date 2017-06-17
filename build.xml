@@ -5,27 +5,33 @@
   <property name="dist.dir" value="${basedir}/dist"/>
   <property name="docs.dir" value="${dist.dir}/javadoc"/>
     
-  <target name="all" depends="clean,build,jar,docs"/>
+  <target name="all" depends="clean,build,jar,docs,sources"/>
   
   <target name="clean">
     <delete dir="${build.dir}"/>
+    <delete dir="${dist.dir}"/>
   </target>  
   
   <target name="build" depends="init">
-    <javac destdir="${build.dir}" srcdir="${src.dir}">
+    <javac destdir="${build.dir}" srcdir="${src.dir}" source="1.7" target="1.7">
       
     </javac>
   </target>
   
   <target name="jar" depends="init">
-    <jar basedir="${build.dir}" file="${dist.dir}/image4j.jar">     
-    </jar>
+    <jar basedir="${build.dir}" file="${dist.dir}/image4j.jar"/>     
   </target>
   
   <target name="docs" depends="init">
     <javadoc destdir="${docs.dir}" windowtitle="image4j" overview="${src.dir}/overview.html">
-      <fileset dir="${src.dir}" includes="**/*.java"/>
+      <fileset dir="${src.dir}"/>
     </javadoc>
+    <jar basedir="${docs.dir}" file="${dist.dir}/image4j-javadoc.jar"/>
+    <delete dir="${docs.dir}"/>
+  </target>
+
+  <target name="sources" depends="init">
+    <jar basedir="${src.dir}" file="${dist.dir}/image4j-sources.jar"/>
   </target>
   
   <target name="init">
