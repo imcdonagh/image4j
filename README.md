@@ -1,6 +1,6 @@
 # image4j
 
-# Overview
+## Overview
 
 The image4j library allows you to read and write certain image formats in 100% pure Java.
 
@@ -9,7 +9,7 @@ Currently the following formats are supported:
 BMP (Microsoft bitmap format - uncompressed; 1, 4, 8, 24 and 32 bit)
 ICO (Microsoft icon format - 1, 4, 8, 24 and 32 bit [XP uncompressed, Vista compressed])
 
-# Purpose
+## Purpose
 
 This project aims to provide:
 
@@ -20,15 +20,15 @@ This project aims to provide:
 <li>with no dependencies on third-party libraries (where possible)</li>
 </ul>
 
-# License
+## License
 
 The image4j library is licensed under the GNU LGPL v2.1 so you are free to use it in your Free Software and Open Source projects, as well as commercial projects, under the terms of the LGPL v2.1.
 
-# History
+## History
 
 This project began after I spent hours searching for a library that would meet the above criteria and found that there is probably no such thing - or at least, not any more. The only support I could find for the ICO format was read-only, so doing cool stuff - like generating favicons on the fly - using only Java code was not possible.
 
-# QuickStart
+## QuickStart
 
 It is possible to decode/encode BMP and ICO files with just one line of code!
 
@@ -65,19 +65,19 @@ Encode
 ICOEncoder.write(images, new File("output.ico"));
 ```
 
-# Documentation
+## Documentation
 
 Browse the API Javadocs online.
 
-# Download
+## Download
 
 Download the latest version at SourceForge.net.
 
-# Credits
+## Credits
 
 The File Formats page at DaubNET for information on various image formats
 The GIMP, which I use for editing images
 
-# Disclaimer
+## Disclaimer
 
 To my knowledge, there are no patents on either the BMP or ICO formats.
