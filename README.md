@@ -6,8 +6,10 @@ The image4j library allows you to read and write certain image formats in 100% p
 
 Currently the following formats are supported:
 
-BMP (Microsoft bitmap format - uncompressed; 1, 4, 8, 24 and 32 bit)
-ICO (Microsoft icon format - 1, 4, 8, 24 and 32 bit [XP uncompressed, Vista compressed])
+<ul>
+<li>BMP (Microsoft bitmap format - uncompressed; 1, 4, 8, 24 and 32 bit)</li>
+<li>ICO (Microsoft icon format - 1, 4, 8, 24 and 32 bit [XP uncompressed, Vista compressed])</li>
+</ul>
 
 ## Purpose
 
