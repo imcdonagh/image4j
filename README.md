@@ -77,8 +77,10 @@ Download the latest version at [SourceForge.net](https://sourceforge.net/project
 
 ## Credits
 
-The File Formats page at DaubNET for information on various image formats
-The GIMP, which I use for editing images
+<ul>
+<li>The [File Formats page at DaubNET](https://www.daubnet.com/en/file-formats) for information on various image formats.</li>
+<li>GIMP, which I use for editing images</li>
+</ul>
 
 ## Disclaimer
 
