@@ -6,21 +6,17 @@ The image4j library allows you to read and write certain image formats in 100% p
 
 Currently the following formats are supported:
 
-<ul>
-<li>BMP (Microsoft bitmap format - uncompressed; 1, 4, 8, 24 and 32 bit)</li>
-<li>ICO (Microsoft icon format - 1, 4, 8, 24 and 32 bit [XP uncompressed, Vista compressed])</li>
-</ul>
+* BMP (Microsoft bitmap format - uncompressed; 1, 4, 8, 24 and 32 bit)
+* ICO (Microsoft icon format - 1, 4, 8, 24 and 32 bit [XP uncompressed, Vista compressed])
 
 ## Purpose
 
 This project aims to provide:
 
-<ul>
-<li>an open source library for handling various image formats in Java</li>
-<li>with a commercial-friendly license</li>
-<li>using only Java code, ie. without using any JNI hacks</li>
-<li>with no dependencies on third-party libraries (where possible)</li>
-</ul>
+* an open source library for handling various image formats in Java
+* with a commercial-friendly license
+* using only Java code, ie. without using any JNI hacks
+* with no dependencies on third-party libraries (where possible)
 
 ## License
 
@@ -77,10 +73,8 @@ Download the latest version at [SourceForge.net](https://sourceforge.net/project
 
 ## Credits
 
-<ul>
-<li>The [File Formats page at DaubNET](https://www.daubnet.com/en/file-formats) for information on various image formats.</li>
-<li>GIMP, which I use for editing images</li>
-</ul>
+* The [File Formats page at DaubNET](https://www.daubnet.com/en/file-formats) for information on various image formats.
+* GIMP, which I use for editing images
 
 ## Disclaimer
 
