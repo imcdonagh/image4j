@@ -38,30 +38,30 @@ The image4j library consists of only Java code and has no dependencies on third-
 
 Although the code is compatible with Java 1.5.0 or later, it should be relatively simple to port the code to an older version, eg. 1.4.2.
 
-BMP
+### BMP
 
-Decode
+#### Decode
 
 
 ```java
 BufferedImage image = BMPDecoder.read(new File("input.bmp"));
 ```
 
-Encode
+#### Encode
 
 ```java
 BMPEncoder.write(image, new File("output.bmp"));
 ```
 
-ICO
+### ICO
 
-Decode
+#### Decode
 
 ```java
 List<BufferedImage> image = ICODecoder.read(new File("input.ico"));
 ```
 
-Encode
+#### Encode
 
 ```java
 ICOEncoder.write(images, new File("output.ico"));
