@@ -31,8 +31,13 @@ public class LittleEndianInputStream extends java.io.DataInputStream implements 
 	  return ((CountingInputStream) in).getCount();
   }
   
-  public int skip(int count, boolean strict) throws IOException {
-	  return IOUtils.skip(this, count, strict);
+  @Override
+  public long skip( long n ) throws IOException {
+    return skip( ( int )n, false );
+  }
+  
+  public int skip( int count, boolean strict ) throws IOException {
+	  return IOUtils.skip( this, count, strict );
   }
   
   /**

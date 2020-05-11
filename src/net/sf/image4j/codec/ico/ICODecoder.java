@@ -167,6 +167,9 @@ public class ICODecoder {
 		try {
 			for (i = 0; i < sCount; i++) {
 				// Make sure we're at the right file offset!
+				while (in.getCount() < entries[i].iFileOffset) {
+					in.skip(entries[i].iFileOffset - in.getCount(), false);
+				}
 				int fileOffset = in.getCount();
 				if (fileOffset != entries[i].iFileOffset) {
 					throw new IOException("Cannot read image #" + i
