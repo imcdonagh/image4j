@@ -99,11 +99,14 @@ public class InfoHeader {
   protected void init(net.sf.image4j.io.LittleEndianInputStream in, int infoSize) throws IOException {
     this.iSize = infoSize;
     
+    // Only 40-byte header is read. If actual header is longer, just skip the rest
+    int ntHeaderSize = 40;
+    
     //Width
     iWidth = in.readIntLE();
     //Height
     iHeight = in.readIntLE();
-    //Planes (=1)
+    //Planes 
     sPlanes = in.readShortLE();
     //Bit count
     sBitCount = in.readShortLE();
@@ -123,13 +126,18 @@ public class InfoHeader {
     iColorsUsed = in.readIntLE();
     //Colors important - number of important colors 0 = all
     iColorsImportant = in.readIntLE();
+    
+    if(iSize > ntHeaderSize){
+    	in.skipBytes(infoSize - ntHeaderSize);
+    }
+    
   }
   
   /**
    * Creates an <tt>InfoHeader</tt> with default values.
    */
   public InfoHeader() {
-    //Size of InfoHeader structure = 40
+    //Size of InfoHeader structure = 40 for Windows NT BITMAPINFOHEADER, see Wikipedia
     iSize = 40;
     //Width
     iWidth = 0;

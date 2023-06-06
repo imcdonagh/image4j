@@ -14,12 +14,28 @@
 	<inceptionYear>2006</inceptionYear>
 
     <properties>
-        <maven.compiler.source>6</maven.compiler.source>
-        <maven.compiler.target>6</maven.compiler.target>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
     <build>
         <sourceDirectory>${basedir}/src</sourceDirectory>
+        <testSourceDirectory>${basedir}/test</testSourceDirectory>
+
+        <testResources>
+            <testResource>
+                <directory>${basedir}/test-resources</directory>
+            </testResource>
+        </testResources>
     </build>
 
 </project>
