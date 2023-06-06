@@ -47,7 +47,7 @@ public class BMPDecoder {
     //DataOffset [4] file offset to raster data
     int dataOffset = lis.readIntLE();
     
-    /* info header [40] */
+    /* info header */
     
     infoHeader = readInfoHeader(lis);
     
@@ -264,7 +264,7 @@ public class BMPDecoder {
     int padBits = bitsPerLine - dataBitsPerLine;
     int padBytes = padBits / 8;
     
-    int bytesPerLine = (int) (bitsPerLine / 8);
+    int bytesPerLine = (infoHeader.iWidth + 31)/32 * 4;
     int[] line = new int[bytesPerLine];
     
     for (int y = infoHeader.iHeight - 1; y >= 0; y--) {
